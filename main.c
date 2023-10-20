@@ -13,11 +13,10 @@ globals global = {NULL, NULL};
 int main(int argc, char **argv)
 {
 	FILE *fp;
-	char buffer[BUFF_SIZE];
-	char *opcode;
+	char buffer[BUFF_SIZE], *opcode;
 	unsigned int line_number = 0;
 	instruction_t opcodes[] = {
-		{"push", push}, {"pall", pall}, {NULL, NULL}
+		{"push", push}, {"pall", pall}, {"pint", pint}, {NULL, NULL}
 	};
 	stack_t *s;
 	int i = 0;
