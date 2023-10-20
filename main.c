@@ -16,7 +16,8 @@ int main(int argc, char **argv)
 	char buffer[BUFF_SIZE], *opcode;
 	unsigned int line_number = 0;
 	instruction_t opcodes[] = {
-		{"push", push}, {"pall", pall}, {"pint", pint}, {NULL, NULL}
+		{"push", push}, {"pall", pall}, {"pint", pint}, 
+		{"pop", pop}, {NULL, NULL}
 	};
 	stack_t *s;
 	int i = 0;
