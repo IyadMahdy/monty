@@ -34,7 +34,7 @@ void push(stack_t **stack, unsigned int line_number)
 		*stack = s;
 
 	global.top = s;
-	
+
 }
 
 /**
@@ -42,7 +42,7 @@ void push(stack_t **stack, unsigned int line_number)
  *
  * Return: 0 if not int, 1 if int
  */
-int int_check()
+int int_check(void)
 {
 	int i = 0;
 

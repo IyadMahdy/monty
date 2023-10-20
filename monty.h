@@ -56,7 +56,7 @@ extern globals global;
 
 void argc_check(int argc);
 void file_check(FILE *fp, char *file);
-int int_check();
+int int_check(void);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
