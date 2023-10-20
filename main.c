@@ -1,5 +1,4 @@
 #include "monty.h"
-#include <stdio.h>
 
 globals global = {NULL, NULL};
 
@@ -17,7 +16,7 @@ int main(int argc, char **argv)
 	unsigned int line_number = 0;
 	instruction_t opcodes[] = {
 		{"push", push}, {"pall", pall}, {"pint", pint}, 
-		{"pop", pop}, {NULL, NULL}
+		{"pop", pop}, {"swap", swap}, {NULL, NULL}
 	};
 	stack_t *s;
 	int i = 0;
