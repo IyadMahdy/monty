@@ -12,6 +12,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (!global.data || !int_check())
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		free_stack();
 		exit(EXIT_FAILURE);
 	}
 
@@ -19,6 +20,7 @@ void push(stack_t **stack, unsigned int line_number)
 	if (!s)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		free_stack();
 		exit(EXIT_FAILURE);
 	}
 	s->n = atoi(global.data);
