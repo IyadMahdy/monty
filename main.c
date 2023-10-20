@@ -30,9 +30,11 @@ int main(int argc, char **argv)
 	{
 		line_number++;
 		opcode = strtok(buffer, " \n\t");
+		if (!opcode)
+			continue;
 		for (i = 0; i < OPCODE_COUNT; i++)
 		{
-			if (!(opcodes[i].opcode))
+			if (!(opcodes[i].opcode) || !opcode)
 			{
 				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 				exit(EXIT_FAILURE);
