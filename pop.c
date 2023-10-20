@@ -19,6 +19,7 @@ void pop(stack_t **stack, unsigned int line_number)
 
 	s = global.top;
 	global.top = (global.top)->prev;
-	(global.top)->next = NULL;
+	if (global.top)
+		(global.top)->next = NULL;
 	free(s);
 }
