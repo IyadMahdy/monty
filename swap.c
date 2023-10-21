@@ -11,12 +11,7 @@ void swap(stack_t **stack, unsigned int line_number)
 	int tmp;
 
 	(void) stack;
-	if (!global.top || !(global.top)->prev)
-	{
-		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-		free_stack();
-		exit(EXIT_FAILURE);
-	}
+	two_elements_check("swap", line_number);
 
 	s = (global.top)->prev;
 	tmp = s->n;
