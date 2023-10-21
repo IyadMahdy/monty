@@ -15,9 +15,10 @@ int main(int argc, char **argv)
 	char buffer[BUFF_SIZE], *opcode;
 	unsigned int line_number = 0;
 	instruction_t opcodes[] = {
-		{"push", push}, {"pall", pall}, {"pint", pint}, 
+		{"push", push}, {"pall", pall}, {"pint", pint},
 		{"pop", pop}, {"swap", swap}, {"add", add},
-		{"nop", nop}, {NULL, NULL}
+		{"nop", nop}, {"sub", sub}, {"mul", mul},
+		{"div", div}, {NULL, NULL}
 	};
 	stack_t *s;
 	int i = 0;
