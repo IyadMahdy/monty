@@ -15,7 +15,7 @@ void swap(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	if (!(global.top)->prev->prev)
+	if (!((global.top)->prev->prev))
 	{
 		(*stack)->prev = global.top;
 		(*stack)->next = NULL;
