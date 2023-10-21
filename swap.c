@@ -7,6 +7,9 @@
  */
 void swap(stack_t **stack, unsigned int line_number)
 {
+	stack_t *s;
+	int tmp;
+
 	(void) stack;
 	if (!global.top || !(global.top)->prev)
 	{
@@ -15,21 +18,8 @@ void swap(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	if (!((global.top)->prev->prev))
-	{
-		(*stack)->prev = global.top;
-		(*stack)->next = NULL;
-		global.top->next = global.top->prev;
-		global.top->prev = NULL;
-		*stack = global.top;
-	}
-	else
-	{
-		(global.top)->prev->next = NULL;
-		(global.top)->next = (global.top)->prev;
-		(global.top)->prev = (global.top)->prev->prev;
-		(global.top)->prev->prev = global.top;
-		(global.top)->prev->prev->next = global.top;
-	}
-	global.top = (global.top)->next;
+	s = (global.top)->prev;
+	tmp = s->n;
+	s->n = (global.top)->n;
+	(global.top)->n = tmp;
 }
