@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 {
 	FILE *fp;
 	char buffer[BUFF_SIZE], *opcode;
-	unsigned int line_number = 0;
+	unsigned int line_number = 0, i = 0;
 	instruction_t opcodes[] = {
 		{"push", push}, {"pall", pall}, {"pint", pint},
 		{"pop", pop}, {"swap", swap}, {"add", add},
@@ -21,7 +21,6 @@ int main(int argc, char **argv)
 		{"div", _div}, {NULL, NULL}
 	};
 	stack_t *s;
-	int i = 0;
 
 	argc_check(argc);
 	fp = fopen(argv[1], "r");
