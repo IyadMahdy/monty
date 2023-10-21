@@ -7,8 +7,6 @@
  */
 void add(stack_t **stack, unsigned int line_number)
 {
-	int res;
-
 	if (!(global.top) || !((global.top)->prev))
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
@@ -16,8 +14,6 @@ void add(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	res = (global.top)->n + (global.top)->prev->n;
+	 (global.top)->prev->n += (global.top)->n;
 	pop(stack, line_number);
-
-	(global.top)->n = res;
 }
