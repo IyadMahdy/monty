@@ -16,6 +16,6 @@ void _div(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	(global.top)->prev->n = (global.top)->n / (global.top)->prev->n;
+	(global.top)->prev->n /= (global.top)->n;
 	pop(stack, line_number);
 }
