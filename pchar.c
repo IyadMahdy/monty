@@ -7,6 +7,7 @@
  */
 void pchar(stack_t **stack, unsigned int line_number)
 {
+	(void) stack;
 	if (global.top->n < 0 || global.top->n > 127 || !(global.top))
 	{
 		if (!(global.top))
