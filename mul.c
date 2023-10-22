@@ -9,6 +9,6 @@ void _mul(stack_t **stack, unsigned int line_number)
 {
 	two_elements_check("mul", line_number);
 
-	(global.top)->prev->n = (global.top)->n * (global.top)->prev->n;
+	(global.top)->prev->n *= (global.top)->n;
 	pop(stack, line_number);
 }
