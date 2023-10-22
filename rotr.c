@@ -13,8 +13,8 @@ void rotr(stack_t **stack, unsigned int line_number)
 
 	(*stack)->prev = global.top;
 	global.top->next = (*stack);
-        *stack = (*stack)->next;
-        global.top = global.top->next;
-        global.top->next = NULL;
-        (*stack)->prev = NULL;
+	*stack = (*stack)->next;
+	global.top = global.top->next;
+	global.top->next = NULL;
+	(*stack)->prev = NULL;
 }

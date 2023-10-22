@@ -8,6 +8,8 @@
 
 #define BUFF_SIZE 1024
 #define OPCODE_COUNT 17
+#define STACK 0
+#define QUEUE 1
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -43,6 +45,7 @@ typedef struct instruction_s
  * struct globals - Global Variables
  * @data: Data for pushing
  * @top: Top of stack (or queue)
+ * @mode: Stack or Queue mode
  *
  * Description: global variables
  */
@@ -50,11 +53,12 @@ typedef struct globals
 {
 	char *data;
 	stack_t *top;
+	int mode;
 } globals;
 
 extern globals global;
 
-void run(char buffer[], unsigned int line_number);
+void run(stack_t **stack, char buffer[], unsigned int line_number);
 void argc_check(int argc);
 void file_check(FILE *fp, char *file);
 int int_check(void);
@@ -76,5 +80,7 @@ void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
+void to_stack(stack_t **stack, unsigned int line_number);
+void to_queue(stack_t **stack, unsigned int line_number);
 
 #endif

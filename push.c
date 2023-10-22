@@ -7,7 +7,7 @@
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *s;
+	stack_t *new_node;
 
 	if (!global.data || !int_check())
 	{
@@ -16,27 +16,37 @@ void push(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	s = malloc(sizeof(stack_t));
-	if (!s)
+	new_node = malloc(sizeof(stack_t));
+	if (!new_node)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		free_stack();
 		exit(EXIT_FAILURE);
 	}
-	s->n = atoi(global.data);
-	s->next = NULL;
-	s->prev = NULL;
-
-	if (global.top)
+	new_node->n = atoi(global.data);
+	new_node->next = NULL;
+	new_node->prev = NULL;
+	if (global.mode == STACK)
 	{
-		(global.top)->next = s;
-		s->prev = global.top;
+		if (global.top)
+		{
+			(global.top)->next = new_node;
+			new_node->prev = global.top;
+		}
+		else
+			*stack = new_node;
+
+		global.top = new_node;
 	}
 	else
-		*stack = s;
-
-	global.top = s;
-
+	{
+		if (*stack == NULL)
+			global.top = new_node;
+		new_node->next = *stack;
+		if (*stack)
+			(*stack)->prev = new_node;
+		*stack = new_node;
+	}
 }
 
 /**

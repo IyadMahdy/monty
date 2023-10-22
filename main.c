@@ -1,6 +1,6 @@
 #include "monty.h"
 
-globals global = {NULL, NULL};
+globals global = {NULL, NULL, STACK};
 
 /**
  * main - interpreter for Monty ByteCodes files.
@@ -13,6 +13,7 @@ int main(int argc, char **argv)
 {
 	FILE *fp;
 	char buffer[BUFF_SIZE];
+	stack_t *s = NULL;
 	unsigned int line_number = 0;
 
 	argc_check(argc);
@@ -21,7 +22,7 @@ int main(int argc, char **argv)
 	while (fgets(buffer, BUFF_SIZE, fp))
 	{
 		line_number++;
-		run(buffer, line_number);
+		run(&s, buffer, line_number);
 	}
 	fclose(fp);
 	free_stack();
@@ -33,18 +34,17 @@ int main(int argc, char **argv)
  * @buffer: Buffer that stores the line
  * @line_number: Line Number
  */
-void run(char buffer[], unsigned int line_number)
+void run(stack_t **stack, char buffer[], unsigned int line_number)
 {
 	unsigned int i = 0;
 	char *opcode;
-	stack_t *s;
 	instruction_t opcodes[] = {
 		{"push", push}, {"pall", pall}, {"pint", pint},
 		{"pop", pop}, {"swap", swap}, {"add", add},
 		{"nop", nop}, {"sub", sub}, {"mul", _mul},
 		{"div", _div}, {"mod", mod}, {"pchar", pchar},
 		{"pstr", pstr}, {"rotl", rotl}, {"rotr", rotr},
-		{NULL, NULL}
+		{"stack", to_stack}, {"queue", to_queue}, {NULL, NULL}
 	};
 
 	opcode = strtok(buffer, " \n\t");
@@ -62,7 +62,7 @@ void run(char buffer[], unsigned int line_number)
 		{
 			if (i == 0)
 				global.data = strtok(NULL, " \t\n");
-			opcodes[i].f(&s, line_number);
+			opcodes[i].f(stack, line_number);
 			break;
 		}
 		i++;
