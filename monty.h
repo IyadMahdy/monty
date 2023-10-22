@@ -54,6 +54,7 @@ typedef struct globals
 
 extern globals global;
 
+void run(char buffer[], unsigned int line_number);
 void argc_check(int argc);
 void file_check(FILE *fp, char *file);
 int int_check(void);

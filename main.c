@@ -12,15 +12,8 @@ globals global = {NULL, NULL};
 int main(int argc, char **argv)
 {
 	FILE *fp;
-	char buffer[BUFF_SIZE], *opcode;
-	unsigned int line_number = 0, i = 0;
-	instruction_t opcodes[] = {
-		{"push", push}, {"pall", pall}, {"pint", pint},
-		{"pop", pop}, {"swap", swap}, {"add", add},
-		{"nop", nop}, {"sub", sub}, {"mul", _mul},
-		{"div", _div}, {"mod", mod}, {NULL, NULL}
-	};
-	stack_t *s;
+	char buffer[BUFF_SIZE];
+	unsigned int line_number = 0;
 
 	argc_check(argc);
 	fp = fopen(argv[1], "r");
@@ -28,29 +21,50 @@ int main(int argc, char **argv)
 	while (fgets(buffer, BUFF_SIZE, fp))
 	{
 		line_number++;
-		opcode = strtok(buffer, " \n\t");
-		if (!opcode)
-			continue;
-		for (i = 0; i < OPCODE_COUNT; i++)
-		{
-			if (!(opcodes[i].opcode) || !opcode)
-			{
-				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-				free_stack();
-				exit(EXIT_FAILURE);
-			}
-			if (strcmp(opcode, opcodes[i].opcode) == 0)
-			{
-				if (i == 0)
-					global.data = strtok(NULL, " \t\n");
-				opcodes[i].f(&s, line_number);
-				break;
-			}
-		}
+		run(buffer, line_number);
 	}
 	fclose(fp);
 	free_stack();
 	return (0);
+}
+
+/**
+ * run - Runs the interpreter
+ * @buffer: Buffer that stores the line
+ * @line_number: Line Number
+ */
+void run(char buffer[], unsigned int line_number)
+{
+	unsigned int i = 0;
+	char *opcode;
+	stack_t *s;
+	instruction_t opcodes[] = {
+		{"push", push}, {"pall", pall}, {"pint", pint},
+		{"pop", pop}, {"swap", swap}, {"add", add},
+		{"nop", nop}, {"sub", sub}, {"mul", _mul},
+		{"div", _div}, {"mod", mod}, {NULL, NULL}
+	};
+
+	opcode = strtok(buffer, " \n\t");
+	if (!opcode || opcode[0] == '#')
+		return;
+	while (1)
+	{
+		if (!(opcodes[i].opcode))
+		{
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
+			free_stack();
+			exit(EXIT_FAILURE);
+		}
+		if (strcmp(opcode, opcodes[i].opcode) == 0)
+		{
+			if (i == 0)
+				global.data = strtok(NULL, " \t\n");
+			opcodes[i].f(&s, line_number);
+			break;
+		}
+		i++;
+	}
 }
 
 /**
