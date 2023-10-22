@@ -8,14 +8,15 @@
 void pchar(stack_t **stack, unsigned int line_number)
 {
 	(void) stack;
-	if (global.top->n < 0 || global.top->n > 127 || !(global.top))
+	if (!global.top || global.top->n < 0 || global.top->n > 127)
 	{
-		if (!(global.top))
+		if (global.top == NULL)
 			fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
 		else
+		{
 			fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
-
-		free_stack();
+			free_stack();
+		}
 		exit(EXIT_FAILURE);
 	}
 
