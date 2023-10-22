@@ -31,6 +31,7 @@ int main(int argc, char **argv)
 
 /**
  * run - Runs the interpreter
+ * @stack: Stack
  * @buffer: Buffer that stores the line
  * @line_number: Line Number
  */
