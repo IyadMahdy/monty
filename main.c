@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 		{"push", push}, {"pall", pall}, {"pint", pint},
 		{"pop", pop}, {"swap", swap}, {"add", add},
 		{"nop", nop}, {"sub", sub}, {"mul", _mul},
-		{"div", _div}, {NULL, NULL}
+		{"div", _div}, {"mod", mod}, {NULL, NULL}
 	};
 	stack_t *s;
 
