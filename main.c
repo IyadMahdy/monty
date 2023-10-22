@@ -43,7 +43,7 @@ void run(char buffer[], unsigned int line_number)
 		{"pop", pop}, {"swap", swap}, {"add", add},
 		{"nop", nop}, {"sub", sub}, {"mul", _mul},
 		{"div", _div}, {"mod", mod}, {"pchar", pchar},
-		{"pstr", pstr}, {NULL, NULL}
+		{"pstr", pstr}, {"rotl", rotl}, {NULL, NULL}
 	};
 
 	opcode = strtok(buffer, " \n\t");
